@@ -1,0 +1,17 @@
+package com.saludtoolsjava.dao;
+
+import com.saludtoolsjava.models.TipoCitaModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TipoCitaDao extends JpaRepository<TipoCitaModel, Integer> {
+
+    @Modifying
+    @Query(value = "UPDATE tbltipos_cita SET Estado = :estado WHERE PKId = :id",
+            nativeQuery = true)
+    void updateEstadoTipoCita(@Param("estado") String estado, @Param("id") Integer id);
+}
